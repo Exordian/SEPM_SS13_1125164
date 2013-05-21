@@ -1,0 +1,46 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'application'
+apply plugin: 'findbugs'
+apply from:'https://raw.github.com/breskeby/gradleplugins/master/emmaPlugin/emma.gradle'
+
+mainClassName = "sepm.Main"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+//    compile 'hsqldb:hsqldb:1.8.0.10'
+    compile 'org.hsqldb:hsqldb:2.2.9'
+    compile 'log4j:log4j:1.2.16'
+    compile 'com.miglayout:miglayout:3.7.4'
+    testCompile 'junit:junit:4.11'
+  emma "emma:emma:2.0.5312"
+}
+
+
+emma{
+    reportPath = "blubb"
+}
+
+task dbmanager(type: JavaExec) {
+    classpath = configurations.compile 
+    main = "org.hsqldb.util.DatabaseManagerSwing"
+}
+
+task dbserver(type: JavaExec) {
+    classpath = configurations.compile
+    main = "org.hsqldb.Server"
+    args = ['-database.0', 'file:./.db', '-dbname.0', 'xdb']
+}
+
+jar {
+  from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+  manifest { attributes 'Main-Class': mainClassName }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.5'
+}
