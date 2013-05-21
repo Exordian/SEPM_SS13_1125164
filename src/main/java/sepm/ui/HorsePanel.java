@@ -127,5 +127,5 @@ public class HorsePanel extends JPanel {
         });
         deleteHorse.setEnabled(false);
         this.add(deleteHorse, "growx, wrap");
-	}
+    }
 }

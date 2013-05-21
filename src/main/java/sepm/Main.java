@@ -12,17 +12,17 @@ import sepm.ui.MainPanel;
 
 public class Main implements Runnable {
 
-	private static Logger logger = Logger.getLogger(Main.class);
-	
-	public static void main(String[] args) {
-		// Log4J
-		BasicConfigurator.configure();
-		
-		// Start UI
+    private static Logger logger = Logger.getLogger(Main.class);
+    
+    public static void main(String[] args) {
+        // Log4J
+        BasicConfigurator.configure();
+        
+        // Start UI
         EventQueue.invokeLater(new Main());
     }
-	
-	@Override
+    
+    @Override
     public void run() {
         JFrame f = new JFrame("Simpel Effizente Pferdetherapie Manager");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
